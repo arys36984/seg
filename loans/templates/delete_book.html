@@ -1,0 +1,16 @@
+{% extends "base_page.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+My Library | Delete Book
+{% endblock %}
+
+{% block content %} 
+<h1>Are you sure you want to delete this book titled {{ book.title }}</h1>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" value="Confirm">
+</form>
+<p> <a href="{% url 'books' %}">Cancel</a> </p>
+{% endblock %}

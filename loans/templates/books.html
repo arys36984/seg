@@ -1,0 +1,30 @@
+{% extends "base_page.html" %}
+
+{% block title %}
+My Library | Books
+{% endblock %}
+
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Book ID</th>
+        <th scope="col">Book Details</th>
+        <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <th scope="row">{{ book.id }}</th>
+                <td> {{ book }} </td>
+                <td>
+                <a href="{% url 'get_book' book.id %}" class="bi bi-eye-fill"></a>
+                <a href="{% url 'update_book' book.id %}" class="bi bi-pencil"></a>
+                <a href="{% url 'delete_book' book.id %} " class="bi bi-trash text-danger"></a>
+                </td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

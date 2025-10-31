@@ -15,6 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from loans import views
 
@@ -27,3 +29,4 @@ urlpatterns = [
     path('books/update/<int:book_id>/', views.update_book, name='update_book'),
     path('books/delete/<int:book_id>/', views.delete_book, name ='delete_book')
 ]
+urlpatterns += static(settings.STATIC_URL)

@@ -29,4 +29,4 @@ urlpatterns = [
     path('books/update/<int:book_id>/', views.update_book, name='update_book'),
     path('books/delete/<int:book_id>/', views.delete_book, name ='delete_book')
 ]
-urlpatterns += static(settings.STATIC_URL)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -4,6 +4,9 @@ from django.urls import reverse
 from random import choice
 from loans.models import Book
 from loans.forms import BookForm
+from django.core.paginator import Paginator
+
+ITEMS_PER_PAGE = 25
 
 # Create your views here.
 def welcome(request):
@@ -18,9 +21,11 @@ def welcome(request):
     return render(request, 'welcome.html', context)
 
 def books(request):
-    books = Book.objects.all()
-
-    context = {'books':books}
+    book_list = Book.objects.all().order_by('id')
+    paginator = Paginator(book_list, ITEMS_PER_PAGE)
+    page_number = request.GET.get("page")
+    page_object = paginator.get_page(page_number)
+    context = {'page_object': page_object}
     return render(request, 'books.html', context)
 
 def get_book(request, book_id):

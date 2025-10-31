@@ -19,7 +19,7 @@ class Member(models.Model):
         return(f"Member {self.id}: {self.last_name}, {self.first_name} <{self.email}>")
     
 class Loan(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.PROTECT)
-    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     start_at = models.DateField()
     end_at = models.DateField()

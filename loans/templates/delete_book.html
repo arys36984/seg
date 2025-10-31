@@ -6,11 +6,14 @@ My Library | Delete Book
 {% endblock %}
 
 {% block content %} 
-<h1>Are you sure you want to delete this book titled {{ book.title }}</h1>
+<h1>Delete Book</h1>
+<p>Are you sure you want to delete this book titled "{{ book.title }}"</p>
 <form method="post" action="">
     {% csrf_token %}
     {{ form | crispy }}
-    <input type="submit" value="Confirm">
+    <input class="btn btn-primary" type="submit" value="Confirm">
 </form>
-<p> <a href="{% url 'books' %}">Cancel</a> </p>
+<p> 
+    <a href="{% url 'books' %}">Cancel</a> 
+</p>
 {% endblock %}

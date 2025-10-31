@@ -10,7 +10,6 @@ My Library | Delete Book
 <p>Are you sure you want to delete this book titled "{{ book.title }}"</p>
 <form method="post" action="">
     {% csrf_token %}
-    {{ form | crispy }}
     <input class="btn btn-primary" type="submit" value="Confirm">
 </form>
 <p> 

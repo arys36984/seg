@@ -80,6 +80,7 @@ def delete_book(request, book_id):
     book = Book.objects.get(pk = book_id)
     if request.method == "POST":
         book.delete()
+        messages.success(request, f"Book Deleted: {book}")
         path = reverse('books')
         return HttpResponseRedirect(path)
     else:

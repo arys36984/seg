@@ -5,6 +5,7 @@ from random import choice
 from loans.models import Book
 from loans.forms import BookForm
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 ITEMS_PER_PAGE = 25
 
@@ -45,6 +46,7 @@ def create_book(request):
             except:
                 form.add_error(None, "The book was not saved.")
             else:
+                messages.success(request, f"Created new book")
                 path = reverse('books')
                 return HttpResponseRedirect(path)
         else:
@@ -67,6 +69,7 @@ def update_book(request, book_id):
                 except:
                     form.add_error(None, "The book was not updated.")
                 else:
+                    messages.success(request, f"Updated book record to: {book}")
                     path = reverse('books')
                     return HttpResponseRedirect(path)
         else:

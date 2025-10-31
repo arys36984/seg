@@ -7,6 +7,8 @@ from loans.models import Book
 
 import datetime
 
+from django.contrib import messages
+
 class CreateBookTest(TestCase):
     def setUp(self):
         self.url = reverse('create_book')
@@ -36,6 +38,9 @@ class CreateBookTest(TestCase):
         self.assertEqual(before_count+1, after_count)
         expected_redirect_url = reverse("books")
         self.assertRedirects(response, expected_redirect_url, status_code=302, target_status_code=200)
+        message_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(len(message_list), 1)
+        self.assertEqual(message_list[0].level, messages.SUCCESS)
 
     def test_post_with_invalid_data(self):
         self.form_input['authors'] = ''
@@ -49,6 +54,8 @@ class CreateBookTest(TestCase):
         form = response.context['form']
         self.assertTrue(isinstance(form, BookForm))
         self.assertTrue(form.is_bound)
+        message_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(len(message_list), 0)
 
     def test_post_with_non_unique_isbn(self):
         Book.objects.create(

@@ -21,6 +21,7 @@ from django.urls import path
 from loans import views
 
 urlpatterns = [
+    path('', views.welcome, name='root'),
     path('welcome/', views.welcome, name = 'welcome'),
     path('admin/', admin.site.urls),
     path('books/', views.books, name = 'books'),
